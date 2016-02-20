@@ -14,8 +14,6 @@
 				scope.activeMove = false;
 				scope.activeResize = false;
 
-				console.log(scope.entity);
-
 				function init() {
 					scope.updatePosition(scope.entity.pos.x, scope.entity.pos.y);
 					scope.updateSize(scope.entity.size.width, scope.entity.size.height);
@@ -31,7 +29,6 @@
 				};
 
 				scope.edit = function() {
-					console.log("Edit entity!");
 					scope.editMode = true;
 				};
 
@@ -51,7 +48,7 @@
 					});
 				};
 
-				scope.updateOrder = function(zIndex) {
+				scope.updateOrder = function() {
 					angular.element('.board-entity').css('zIndex', 1);
 					elem.css('z-index', 2);
 				};
@@ -65,7 +62,7 @@
 					var currentX = event.screenX;
 					var currentY = event.screenY;
 
-					scope.updateOrder(2);
+					scope.updateOrder();
 
 					angular.element(document).on('mousemove', function(e) {
 						if(e.stopPropagation) e.stopPropagation();
@@ -99,7 +96,6 @@
 				});
 
 				elem.on('mousedown', '.resize-handle', function(event) {
-					console.log('mouse down on resize handle!');
 					if(event.stopPropagation) event.stopPropagation();
 				    if(event.preventDefault) event.preventDefault();
 				    event.cancelBubble = true;

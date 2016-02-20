@@ -5,7 +5,12 @@
 		'$scope', 
 		'$state', 
 		'$stateParams', 
-		'BoardService', function($scope, $state, $stateParams, BoardService) {
-		$scope.board = 'Test board!';
+		'UserService', 
+	function($scope, $state, $stateParams, UserService) {
+		$scope.init = function() {
+			$state.go('board', {id: UserService.getRootId()});
+		};
+
+		$scope.init();
 	}]);
 })(angular, this);
