@@ -2,4 +2,14 @@
 	position: absolute;
 	border: 1px solid #ddd;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, .66);
+	background-color: #fff;
+
+	.resize-handle {
+		width: 16px;
+		height: 16px;
+		position: absolute;
+		right: 0px;
+		bottom: 0px;
+		border: 1px solid #ddd;
+	}
 }

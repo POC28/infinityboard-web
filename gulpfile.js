@@ -31,7 +31,7 @@ gulp.task('js', function (done) {
 gulp.task('copy', function (done) {
 	gulp.src(['./src/*.html', './src/js/**/*.html'])
 		.pipe(gulp.dest('./www'));
-	gulp.src('./src/fonts/*')
+	gulp.src(['./src/fonts/*', './src/lib/font-awesome/fonts/*'])
 		.pipe(gulp.dest('./www/fonts'));
 	gulp.src('./src/img/*')
 		.pipe(gulp.dest('./www/img'), done())
