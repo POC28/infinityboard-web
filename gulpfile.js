@@ -12,13 +12,14 @@ gulp.task('sass', function (done) {
 
 gulp.task('js', function (done) {
 	var jsfiles = [
+		'./src/lib/jquery/dist/jquery.min.js',
 		'./src/lib/angular/angular.min.js',
 		'./src/lib/angular-ui-router/release/angular-ui-router.min.js',
 		'./src/lib/moment/min/moment.min.js',
 		'./src/lib/lodash/dist/lodash.min.js',
 		'./src/js/app.js',
 		'./src/js/modules/**/*.js',
-		'./src/js/directives/*.js',
+		'./src/js/directives/**/*.js',
 		'./src/js/services/*.js'
 	];
 

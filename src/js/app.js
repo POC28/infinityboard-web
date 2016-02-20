@@ -1,12 +1,19 @@
+'use strict';
+
 var app = angular.module('infinityBoard', ['ui.router']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
     
-    $urlRouterProvider.otherwise('/board');
+    $urlRouterProvider.otherwise('/boards');
     
     $stateProvider
+        .state('boards', {
+            url: '/boards',
+            templateUrl: 'modules/board/templates/boards.template.html',
+            controller: 'boardsController'
+        })
         .state('board', {
-            url: '/board',
+            url: '/board/:id',
             templateUrl: 'modules/board/templates/board.template.html',
             controller: 'boardController'
         })
