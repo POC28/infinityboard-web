@@ -7,10 +7,12 @@
 			replace: true,
 			templateUrl: './directives/entity/entity.template.html',
 			scope: {
-				entity: '='
+				entity: '=',
+				index: '='
 			},
 			link: function(scope, elem, attrs) {
 				scope.activeMove = false;
+				scope.activeResize = false;
 
 				console.log(scope.entity);
 
@@ -19,6 +21,19 @@
 					scope.updateSize(scope.entity.size.width, scope.entity.size.height);
 					scope.updateOrder(BoardService.getCurrentZIndex());
 				}
+
+				scope.remove = function() {
+					scope.$parent.removeEntity(scope.index);
+				};
+
+				scope.open = function() {
+					scope.$parent.openBoard(scope.index);
+				};
+
+				scope.edit = function() {
+					console.log("Edit entity!");
+					scope.editMode = true;
+				};
 
 				scope.updatePosition = function(x, y) {
 					elem.css({
@@ -37,7 +52,8 @@
 				};
 
 				scope.updateOrder = function(zIndex) {
-					elem.css('z-index', zIndex);
+					angular.element('.board-entity').css('zIndex', 1);
+					elem.css('z-index', 2);
 				};
 
 				elem.on('mousedown', function(event) {
@@ -48,6 +64,8 @@
 
 					var currentX = event.screenX;
 					var currentY = event.screenY;
+
+					scope.updateOrder(2);
 
 					angular.element(document).on('mousemove', function(e) {
 						if(e.stopPropagation) e.stopPropagation();

@@ -5,35 +5,26 @@
 		'$scope', 
 		'$state', 
 		'$stateParams', 
-		'BoardService', function($scope, $state, $stateParams, BoardService) {
+		'BoardService', 
+	function($scope, $state, $stateParams, BoardService) {
 		$scope.currentBoard = $stateParams.id;
-		$scope.testEntity = {
-			pos: {
-				x: 300,
-				y: 200
-			},
-			size: {
-				width: 200,
-				height: 200
-			},
-			title: 'Test entity',
-			angle: 0
-		};
-
-		$scope.testEntity2 = {
-			pos: {
-				x: 400,
-				y: 400
-			},
-			size: {
-				width: 200,
-				height: 200
-			},
-			title: 'Test entity',
-			angle: 0
-		};
-
+		$scope.entities = BoardService.getEntities();
 		$scope.board = BoardService.getBoard();
-		console.log($scope.board);
+
+		$scope.removeEntity = function(index) {
+			BoardService.removeEntity(index);
+		};
+
+		$scope.addEntity = function() {
+			BoardService.addEntity();
+		};
+
+		$scope.openBoard = function(id) {
+			$state.go('board', {id: id});
+		};
+
+		$scope.goToParent = function() {
+			$state.go('board', {id: BoardService.getParentId()});
+		};
 	}]);
 })(angular, this);

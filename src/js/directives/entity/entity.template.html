@@ -1,8 +1,14 @@
 <div class="board-entity">
 	<div class="entity-control">
-		<div class="edit-entity"><i class="fa fa-pencil"></i></div>
-		<div class="open-entity"><i class="fa fa-external-link"></i></div>
+		<div class="button edit-entity" ng-click="edit()"><i class="fa fa-pencil"></i></div>
+		<div class="button open-entity" ng-click="open()"><i class="fa fa-external-link"></i></div>
+		<div class="button remove-entity" ng-click="remove()"><i class="fa fa-times"></i></div>
 	</div>
-	<p>This is a board entit</p>
+	<div class="entity-body">
+		<p ng-bind-html="entity.body"></p>
+	</div>
+	<div class="entity-title">
+		<p ng-bind="entity.title"></p>
+	</div>
 	<div class="resize-handle"></div>
 </div>
