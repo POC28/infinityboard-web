@@ -1,7 +1,7 @@
 'use strict';
 
 (function(angular, window, undefined) {
-	angular.module('infinityBoard').directive('boardToolbar', ['BoardService', 'BoardControlService', function(BoardService, BoardControlService) {
+	angular.module('infinityBoard').directive('boardToolbar', ['BoardControlService', function(BoardControlService) {
 		return {
 			restrict: 'E',
 			replace: true,

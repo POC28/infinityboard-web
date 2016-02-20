@@ -1,7 +1,7 @@
 'use strict';
 
 (function(angular, window, undefined) {
-	angular.module('infinityBoard').directive('boardEntity', ['BoardService', function(BoardService) {
+	angular.module('infinityBoard').directive('boardEntity', [function() {
 		return {
 			restrict: 'E',
 			replace: true,
@@ -17,7 +17,7 @@
 				function init() {
 					scope.updatePosition(scope.entity.pos.x, scope.entity.pos.y);
 					scope.updateSize(scope.entity.size.width, scope.entity.size.height);
-					scope.updateOrder(BoardService.getCurrentZIndex());
+					scope.updateOrder();
 				}
 
 				scope.remove = function() {
@@ -25,7 +25,7 @@
 				};
 
 				scope.open = function() {
-					scope.$parent.openBoard(scope.index);
+					scope.$parent.openBoard(scope.entity.id);
 				};
 
 				scope.edit = function() {

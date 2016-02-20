@@ -1,4 +1,5 @@
-<div>
-	<board-entity ng-repeat="entity in entities" data-entity="entity" data-index="$index"></board-entity>
+<div class="board">
+	<div class="board-title" ng-bind="board.title"></div>
+	<board-entity ng-repeat="entity in board.children" data-entity="entity" data-index="$index"></board-entity>
 	<board-toolbar></board-toolbar>
 </div>

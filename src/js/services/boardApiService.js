@@ -8,7 +8,7 @@ angular.module('infinityBoard').factory('Board', function($http) {
 	BoardFn.list = function(success, fail) {
 		$http({
 			method: 'GET',
-			url: '/boards',
+			url: baseUrl + '/boards',
 			responseType: 'json'
 		}).success(success).error(fail);
 	};
@@ -16,7 +16,15 @@ angular.module('infinityBoard').factory('Board', function($http) {
 	BoardFn.find = function(id, success, fail) {
 		$http({
 			method: 'GET',
-			url: '/board/' + id,
+			url: baseUrl + '/boards/' + id,
+			responseType: 'json'
+		}).success(success).error(fail);
+	};
+
+	BoardFn.getChildren = function(id, success, fail) {
+		$http({
+			method: 'GET',
+			url: baseUrl + '/boards/' + id + '/children',
 			responseType: 'json'
 		}).success(success).error(fail);
 	};
@@ -24,7 +32,7 @@ angular.module('infinityBoard').factory('Board', function($http) {
 	BoardFn.create = function(board, success, fail) {
 		$http({
 			method: 'POST',
-			url: '/board',
+			url: baseUrl + '/boards',
 			responseType: 'json',
 			data: board
 		}).success(success).error(fail);
@@ -33,7 +41,7 @@ angular.module('infinityBoard').factory('Board', function($http) {
 	BoardFn.update = function(id, board, success, fail) {
 		$http({
 			method: 'PUT',
-			url: '/board/' + id,
+			url: baseUrl + '/boards/' + id,
 			responseType: 'json',
 			data: board
 		}).success(success).error(fail);
@@ -42,7 +50,7 @@ angular.module('infinityBoard').factory('Board', function($http) {
 	BoardFn.remove = function(id, success, fail) {
 		$http({
 			method: 'DELETE',
-			url: '/board/' + id,
+			url: baseUrl + '/boards/' + id,
 			responseType: 'json'
 		}).success(success).error(fail);
 	};

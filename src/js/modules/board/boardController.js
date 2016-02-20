@@ -5,18 +5,66 @@
 		'$scope', 
 		'$state', 
 		'$stateParams', 
-		'BoardService', 
-	function($scope, $state, $stateParams, BoardService) {
+		'Board',
+	function($scope, $state, $stateParams, Board) {
 		$scope.currentBoard = $stateParams.id;
-		$scope.entities = BoardService.getEntities();
-		$scope.board = BoardService.getBoard();
+
+		function init() {
+			Board.find($stateParams.id, function(board) {
+				console.log(board);
+				$scope.board = board;
+			}, function(error) {
+				console.log('Error!');
+			});
+		}
+		init();
 
 		$scope.removeEntity = function(index) {
-			BoardService.removeEntity(index);
+			Board.remove($scope.board.children[index].id, function() {
+				$scope.board.children.splice(index, 1);
+
+				Board.update($scope.board.id, $scope.board, function(data) {
+					console.log('Saved current board', data)
+				}, function(error) {
+					console.log('failed to save board!', error);
+				});
+			}, function() {
+				console.log('Error!');
+			});
 		};
 
 		$scope.addEntity = function() {
-			BoardService.addEntity();
+			var entity = {
+				parentId: $scope.board.id,
+				pos: {
+					x: 100,
+					y: 100
+				},
+				size: {
+					width: 100,
+					height: 100
+				},
+				title: 'Untitled',
+				angle: 0
+			};
+
+			Board.create(entity, function(data) {
+				entity.id = data.id;
+
+				if($scope.board.children) {
+					$scope.board.children.push(entity);
+				} else {
+					$scope.board.children = [ entity ];
+				}
+
+				Board.update($scope.board.id, $scope.board, function(data) {
+					console.log('Saved current board', data)
+				}, function(error) {
+					console.log('failed to save board!', error);
+				});
+			}, function(error) {
+				console.log('Error!');
+			});
 		};
 
 		$scope.openBoard = function(id) {
@@ -24,7 +72,7 @@
 		};
 
 		$scope.goToParent = function() {
-			$state.go('board', {id: BoardService.getParentId()});
+			$state.go('board', {id: $scope.board.parentId});
 		};
 	}]);
 })(angular, this);

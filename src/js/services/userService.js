@@ -6,7 +6,7 @@
 			name: "Glenn Edberg",
 			username: "Fagertveit",
 			email: "gridur@gmail.com",
-			rootBoard: "56c8c224c46d8e030012563e"
+			rootBoard: "56c8eb49c51ba903002c0b7a"
 		};
 
 		var getRootId = function() {

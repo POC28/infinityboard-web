@@ -2,8 +2,8 @@
 
 var app = angular.module('infinityBoard', ['ui.router']);
 
-app.config(function($stateProvider, $urlRouterProvider) {
-    
+app.config(function($httpProvider, $stateProvider, $urlRouterProvider) {
+    $httpProvider.defaults.useXDomain = true;
     $urlRouterProvider.otherwise('/boards');
     
     $stateProvider
