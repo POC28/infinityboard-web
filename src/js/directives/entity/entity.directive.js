@@ -1,7 +1,7 @@
 'use strict';
 
 (function(angular, window, undefined) {
-	angular.module('infinityBoard').directive('boardEntity', [function() {
+	angular.module('infinityBoard').directive('boardEntity', ['$timeout', function($timeout) {
 		return {
 			restrict: 'E',
 			replace: true,
@@ -13,6 +13,9 @@
 			link: function(scope, elem, attrs) {
 				scope.activeMove = false;
 				scope.activeResize = false;
+				scope.doubleClick = false;
+				scope.clickTimeout = 500;
+				scope.activeClick = false;
 
 				function init() {
 					scope.updatePosition(scope.entity.pos.x, scope.entity.pos.y);
@@ -52,6 +55,32 @@
 					angular.element('.board-entity').css('zIndex', 1);
 					elem.css('z-index', 2);
 				};
+
+				elem.on('click', function(event) {
+					if(!scope.activeClick) {
+						scope.activeClick = true;
+
+						$timeout(function() {
+							if(scope.doubleClick) {
+								scope.doubleClick = false;
+								scope.activeClick = false;
+								return false;
+							}
+
+							if(scope.activeMove) {
+								return false;
+							}
+
+							scope.activeCLick = false;
+							console.log('Edit node');
+						}, scope.clickTimeout);
+					}
+				});
+
+				elem.on('dblclick', function(event) {
+					scope.doubleClick = true;
+					scope.$parent.openBoard(scope.entity.id);
+				});
 
 				elem.on('mousedown', function(event) {
 					scope.activeMove = true;
