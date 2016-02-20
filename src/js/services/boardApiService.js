@@ -3,7 +3,7 @@
 angular.module('infinityBoard').factory('Board', function($http) {
 	// AngularJS will instantiate a singleton by calling "new" on this function
 	var BoardFn = {};
-	var baseUrl = '//localhost:8080/';
+	var baseUrl = '//infinityboard.herokuapp.com';
 
 	BoardFn.list = function(success, fail) {
 		$http({

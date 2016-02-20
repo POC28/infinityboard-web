@@ -1,7 +1,7 @@
 'use strict';
 
 (function(angular, window, undefined) {
-	angular.module('infinityBoard').factory('BoardService', function() {
+	angular.module('infinityBoard').factory('BoardService',['Board', function(Board) {
 		var board = {
 			parent: {
 				id: '666'
@@ -38,13 +38,22 @@
 
 		var currentZIndex = 1;
 
+		var fetch = function(id) {
+			Board.find(id, function(data) {
+				console.log(data);
+				board = data;
+			}, function(error) {
+				console.log("Error:", error);
+			})
+		};
+
 		var getBoard = function() {
 			return board;
-		}
+		};
 
 		var getEntities = function() {
 			return board.children;
-		}
+		};
 
 		var addEntity = function() {
 			var entity = {
@@ -61,19 +70,19 @@
 			};
 
 			board.children.push(entity);
-		}
+		};
 
 		var removeEntity = function(index) {
 			board.children.splice(index, 1);
-		}
+		};
 
 		var getCurrentZIndex = function() {
 			return currentZIndex += 1;
-		}
+		};
 
 		var getParentId = function() {
 			return board.parent.id;
-		}
+		};
 
 		return {
 			getBoard: getBoard,
@@ -83,5 +92,5 @@
 			getCurrentZIndex: getCurrentZIndex,
 			getParentId: getParentId
 		};
-	});
+	}]);
 })(angular, this);

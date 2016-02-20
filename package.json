@@ -15,6 +15,7 @@
   "author": "Glenn Edberg",
   "license": "ISC",
   "dependencies": {
+    "bower": "^1.7.7",
     "express": "^4.13.4",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
