@@ -1,3 +1,5 @@
-angular.module('infinityBoard').service('boardService', function() {
+(function(angular, window, undefined) {
+	angular.module('infinityBoard').service('BoardService', function() {
 
-});
+	});
+})(angular, this);
