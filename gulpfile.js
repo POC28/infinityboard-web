@@ -3,11 +3,12 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
+var clean = require('gulp-clean');
  
 gulp.task('sass', function (done) {
 	gulp.src('./src/sass/**/*.scss')
 		.pipe(sass.sync().on('error', sass.logError))
-		.pipe(gulp.dest('./www/css'), done());
+		.pipe(gulp.dest('./www/css'), done);
 });
 
 gulp.task('js', function (done) {
@@ -27,7 +28,11 @@ gulp.task('js', function (done) {
 
 	gulp.src(jsfiles)
       	.pipe(concat('app.min.js'))
-      	.pipe(gulp.dest('./www/js'), done());
+      	.pipe(gulp.dest('./www/js'), done);
+});
+
+gulp.task('clean', function (done) {
+	gulp.src('www').pipe(clean(), done);
 });
 
 gulp.task('copy', function (done) {
@@ -36,7 +41,7 @@ gulp.task('copy', function (done) {
 	gulp.src(['./src/fonts/*', './src/lib/font-awesome/fonts/*'])
 		.pipe(gulp.dest('./www/fonts'));
 	gulp.src('./src/img/*')
-		.pipe(gulp.dest('./www/img'), done())
+		.pipe(gulp.dest('./www/img'), done)
 });
  
 gulp.task('watch', function () {
@@ -45,4 +50,4 @@ gulp.task('watch', function () {
 	gulp.watch(['./src/*.html', './src/js/**/*.html', './src/fonts/*', './src/img/*'], ['copy']);
 });
 
-gulp.task('default', ['sass', 'js', 'copy']);
+gulp.task('default', ['clean', 'sass', 'js', 'copy']);
