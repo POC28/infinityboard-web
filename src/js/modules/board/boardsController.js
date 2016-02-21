@@ -8,6 +8,10 @@
 		'UserService',
 		'Board',
 	function($scope, $state, $stateParams, UserService, Board) {
+		if(!UserService.isAuthenticated()) {
+			$state.go('login');
+		}
+
 		$scope.init = function() {
 			Board.getRoot(function(data) {
 				$state.go('board', {id: data.id});

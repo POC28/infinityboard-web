@@ -7,7 +7,12 @@
 		'$stateParams', 
 		'Board',
 		'Upload',
-	function($scope, $state, $stateParams, Board, Upload) {
+		'UserService',
+	function($scope, $state, $stateParams, Board, Upload, UserService) {
+		if(!UserService.isAuthenticated()) {
+			$state.go('login');
+		}
+
 		$scope.currentBoard = $stateParams.id;
 		$scope.files = [];
 
