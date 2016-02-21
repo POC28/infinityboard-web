@@ -32,7 +32,7 @@ gulp.task('js', function (done) {
 });
 
 gulp.task('clean', function (done) {
-	gulp.src('www').pipe(clean(), done);
+	gulp.src('www').pipe(clean({force: true}), done);
 });
 
 gulp.task('copy', function (done) {
