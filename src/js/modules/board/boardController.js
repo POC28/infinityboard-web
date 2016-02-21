@@ -77,6 +77,12 @@
 			});
 		};
 
+		$scope.editEntity = function(index) {
+			$scope.currentEntity = $scope.board.children[index];
+
+			$('#testModal').modal();
+		}
+
 		$scope.openBoard = function(id) {
 			$state.go('board', {id: id});
 		};

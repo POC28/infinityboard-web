@@ -25,7 +25,7 @@
 				};
 
 				scope.edit = function() {
-					scope.editMode = true;
+					scope.$parent.editEntity(scope.index);
 				};
 
 				scope.updatePosition = function(x, y) {
