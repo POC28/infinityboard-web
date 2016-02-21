@@ -10,7 +10,7 @@ gulp.task('clean', function (done) {
 	return del('www/**/*');
 });
 
-gulp.task('js', ['clean'], function (done) {
+gulp.task('js', function (done) {
 	var jsfiles = [
 		'./src/lib/jquery/dist/jquery.min.js',
 		'./src/lib/bootstrap-sass/assets/javascripts/bootstrap.min.js',
@@ -19,6 +19,7 @@ gulp.task('js', ['clean'], function (done) {
 		'./src/lib/angular-ui-router/release/angular-ui-router.min.js',
 		'./src/lib/moment/min/moment.min.js',
 		'./src/lib/lodash/dist/lodash.min.js',
+		'./src/js/config.js',
 		'./src/js/app.js',
 		'./src/js/modules/**/*.js',
 		'./src/js/directives/**/*.js',
@@ -31,13 +32,13 @@ gulp.task('js', ['clean'], function (done) {
 
 });
 
-gulp.task('sass', ['js'], function (done) {
+gulp.task('sass', function (done) {
 	gulp.src('./src/sass/**/*.scss')
 		.pipe(sass.sync().on('error', sass.logError))
 		.pipe(gulp.dest('./www/css'), done);
 });
 
-gulp.task('copy', ['clean', 'sass', 'js'], function (done) {
+gulp.task('copy', function (done) {
 	es.concat(
 		gulp.src(['./src/*.html', './src/js/**/*.html'])
 			.pipe(gulp.dest('./www')),
@@ -54,4 +55,4 @@ gulp.task('watch', function () {
 	gulp.watch(['./src/*.html', './src/js/**/*.html', './src/fonts/*', './src/img/*'], ['copy']);
 });
 
-gulp.task('default', ['copy']);
+gulp.task('default', ['copy', 'sass', 'js']);

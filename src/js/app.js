@@ -2,8 +2,10 @@
 
 var app = angular.module('infinityBoard', ['ui.router', 'ngFileUpload']);
 
+console.log(config);
+
 app.constant('CONFIG', {
-  serverUrl: (process && process.env.SERVER_URL) || '//infinityboard.herokuapp.com'
+  serverUrl: config.serverUrl || '//infinityboard.herokuapp.com'
 });
 
 app.config(function($httpProvider, $stateProvider, $urlRouterProvider) {

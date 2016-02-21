@@ -7,6 +7,23 @@
 		'User',
 		'UserService',
 	function($scope, $state, User, UserService) {
+		//TODO: remove after presentation
+		User.login({username: 'default', password: 'password'}, function (data) {
+			UserService.storeToken(data.token);
+
+			User.getCurrent(function(data) {
+				UserService.setUser(data);
+				$state.go('boards');
+			});
+		});
+
+		return;
+
+		User.getCurrent(function (data) {
+			UserService.setUser(data);
+			$state.go(boards);
+		});
+
 		$scope.user = {
 			username: '',
 			password: ''
