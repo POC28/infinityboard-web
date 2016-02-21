@@ -1,10 +1,10 @@
 'use strict';
 
 (function(angular, window, undefined) {
-	angular.module('infinityBoard').factory('User',['$http', 'UserService', function($http, UserService) {
+	angular.module('infinityBoard').factory('User',['$http', 'UserService', 'CONFIG', function($http, UserService, CONFIG) {
 		// AngularJS will instantiate a singleton by calling "new" on this function
 		var UserFn = {};
-		var baseUrl = '//infinityboard.herokuapp.com';
+		var baseUrl = CONFIG.serverUrl;
 
 		UserFn.login = function(user, success, fail) {
 			$http({

@@ -26,7 +26,7 @@
 		};
 
 		var deleteToken = function () {
-			return localStorage.deleteItem('$infinityBoardToken');
+			return localStorage.removeItem('$infinityBoardToken');
 		};
 
 		return {

@@ -1,10 +1,10 @@
 'use strict';
 
 (function(angular, window, undefined) {
-	angular.module('infinityBoard').factory('Board',['$http', 'UserService', function($http, UserService) {
+	angular.module('infinityBoard').factory('Board',['$http', 'UserService', 'CONFIG', function($http, UserService, CONFIG) {
 		// AngularJS will instantiate a singleton by calling "new" on this function
 		var BoardFn = {};
-		var baseUrl = '//infinityboard.herokuapp.com';
+		var baseUrl = CONFIG.serverUrl;
 
 		BoardFn.list = function(success, fail) {
 			$http({
@@ -60,6 +60,7 @@
 		};
 
 		BoardFn.update = function(id, board, success, fail) {
+			console.log(id);
 			$http({
 				method: 'PUT',
 				url: baseUrl + '/boards/' + id,

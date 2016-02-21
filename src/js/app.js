@@ -2,6 +2,10 @@
 
 var app = angular.module('infinityBoard', ['ui.router', 'ngFileUpload']);
 
+app.constant('CONFIG', {
+  serverUrl: process.env.SERVER_URL || '//infinityboard.herokuapp.com';
+});
+
 app.config(function($httpProvider, $stateProvider, $urlRouterProvider) {
     $httpProvider.defaults.useXDomain = true;
     $urlRouterProvider.otherwise('/login');

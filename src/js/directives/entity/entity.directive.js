@@ -36,7 +36,6 @@
 				};
 
 				scope.edit = function() {
-					console.log(scope.hasMoved);
 					if(!scope.hasMoved) {
 						scope.$parent.editEntity(scope.index);
 					}
