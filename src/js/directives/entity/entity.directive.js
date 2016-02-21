@@ -13,6 +13,7 @@
 			link: function(scope, elem, attrs) {
 				scope.activeMove = false;
 				scope.activeResize = false;
+				scope.hasMoved = false;
 
 				function init() {
 					scope.updatePosition(scope.entity.pos.x, scope.entity.pos.y);
@@ -20,12 +21,25 @@
 					scope.updateOrder();
 				}
 
+				function setHasMoved() {
+					scope.hasMoved = true;
+
+					setTimeout(function () {
+						scope.hasMoved = false;
+					}, 100);
+				}
+
 				scope.remove = function() {
-					scope.$parent.removeEntity(scope.index);
+					if(!scope.hasMoved) {
+						scope.$parent.removeEntity(scope.index);
+					}
 				};
 
 				scope.edit = function() {
-					scope.$parent.editEntity(scope.index);
+					console.log(scope.hasMoved);
+					if(!scope.hasMoved) {
+						scope.$parent.editEntity(scope.index);
+					}
 				};
 
 				scope.updatePosition = function(x, y) {
@@ -73,7 +87,7 @@
 					scope.updateOrder();
 
 					angular.element(document).on('mousemove', function(e) {
-						if(e.stopPropagation) e.stopPropagation();
+							if(e.stopPropagation) e.stopPropagation();
 					    if(e.preventDefault) e.preventDefault();
 					    e.cancelBubble = true;
 					    e.returnValue = false;
@@ -91,16 +105,20 @@
 					angular.element(document).on('mouseup', function(e) {
 						if(scope.activeMove) {
 							currentX = e.screenX;
-					    	currentY = e.screenY;
+				    	currentY = e.screenY;
 
-					    	scope.entity.pos.x = scope.entity.pos.x - (scope.originX - currentX);
-					    	scope.entity.pos.y = scope.entity.pos.y - (scope.originY - currentY);
+					    if(scope.originX !== currentX || scope.originY !== currentY) {
+					    	setHasMoved();
+					    }
 
-					    	scope.updatePosition(scope.entity.pos.x, scope.entity.pos.y);
+				    	scope.entity.pos.x = scope.entity.pos.x - (scope.originX - currentX);
+				    	scope.entity.pos.y = scope.entity.pos.y - (scope.originY - currentY);
 
-					    	scope.activeMove = false;
+				    	scope.updatePosition(scope.entity.pos.x, scope.entity.pos.y);
 
-					    	scope.updateEntity();
+				    	scope.activeMove = false;
+
+				    	scope.updateEntity();
 						}
 					});
 				});
@@ -120,10 +138,10 @@
 					var currentY = event.screenY;
 
 					angular.element(document).on('mousemove', function(e) {
-						if(e.stopPropagation) e.stopPropagation();
-					    if(e.preventDefault) e.preventDefault();
-					    e.cancelBubble = true;
-					    e.returnValue = false;
+							if(e.stopPropagation) e.stopPropagation();
+							if(e.preventDefault) e.preventDefault();
+							e.cancelBubble = true;
+							e.returnValue = false;
 
 					    if(scope.activeResize) {
 					    	currentX = e.screenX;
