@@ -25,9 +25,14 @@
 			return localStorage.getItem('$infinityBoardToken');
 		};
 
+		var deleteToken = function () {
+			return localStorage.deleteItem('$infinityBoardToken');
+		};
+
 		return {
 			storeToken: storeToken,
 			getToken: getToken,
+			deleteToken: deleteToken,
 			isAuthenticated: isAuthenticated,
 			setUser: setUser
 		};

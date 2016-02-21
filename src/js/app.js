@@ -27,6 +27,10 @@ app.config(function($httpProvider, $stateProvider, $urlRouterProvider) {
         	templateUrl: 'modules/register/templates/register.template.html',
         	controller: 'registerController'
         })
+        .state('logout', {
+            url: '/logout',
+            controller: 'logoutController'
+        })
         .state('settings', {
         	url: '/settings',
         	templateUrl: 'modules/settings/templates/settings.template.html',
