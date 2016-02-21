@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
-var clean = require('gulp-clean');
+var del = require('del');
  
 gulp.task('sass', function (done) {
 	gulp.src('./src/sass/**/*.scss')
@@ -32,7 +32,7 @@ gulp.task('js', function (done) {
 });
 
 gulp.task('clean', function (done) {
-	gulp.src('www').pipe(clean({force: true}), done);
+	return del('www/**/*');
 });
 
 gulp.task('copy', function (done) {
