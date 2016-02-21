@@ -4,8 +4,9 @@
 	angular.module('infinityBoard').controller('registerController', [
 		'$scope',
 		'$state',
-		'User', 
-	function($scope, $state, User) {
+		'User',
+		'UserService',
+	function($scope, $state, User, UserService) {
 		$scope.user = {
 			username: '',
 			email: '',
@@ -13,11 +14,10 @@
 		};
 
 		$scope.registerUser = function() {
-			console.log($scope.user);
-
 			User.register($scope.user, function(data) {
-				console.log(data);
-				$state.go('login');
+				UserService.storeToken(data.token);
+				UserService.setUser(data);
+				$state.go('boards');
 			}, function(error) {
 				console.log('Registration failed');
 			});
