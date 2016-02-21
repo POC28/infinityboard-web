@@ -2,9 +2,7 @@
 
 (function(angular, window, undefined) {
 	angular.module('infinityBoard').factory('UserService', function() {
-		var user = {
-			rootBoard: "56c8eb49c51ba903002c0b7a"
-		};
+		var user = {};
 
 		var setUser = function(user) {
 			console.log('Current User: ', user);
@@ -27,12 +25,7 @@
 			return localStorage.getItem('$infinityBoardToken');
 		};
 
-		var getRootId = function() {
-			return user.rootBoard;
-		};
-
 		return {
-			getRootId: getRootId,
 			storeToken: storeToken,
 			getToken: getToken,
 			isAuthenticated: isAuthenticated,

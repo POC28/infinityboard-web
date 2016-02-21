@@ -5,10 +5,15 @@
 		'$scope', 
 		'$state', 
 		'$stateParams', 
-		'UserService', 
-	function($scope, $state, $stateParams, UserService) {
+		'UserService',
+		'Board',
+	function($scope, $state, $stateParams, UserService, Board) {
 		$scope.init = function() {
-			$state.go('board', {id: UserService.getRootId()});
+			Board.getRoot(function(data) {
+				$state.go('board', {id: data.id});
+			}, function(error) {
+				console.log('Can\'t find root board!');
+			});
 		};
 
 		$scope.init();

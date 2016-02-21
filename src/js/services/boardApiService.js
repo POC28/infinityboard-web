@@ -25,6 +25,17 @@
 			}).success(success).error(fail);
 		};
 
+		BoardFn.getRoot = function(success, fail) {
+			$http({
+				method: 'GET',
+				url: baseUrl + '/boards/root',
+				responseType: 'json',
+				headers: {
+					Authorization: 'JWT ' + UserService.getToken()
+				}
+			}).success(success).error(fail);
+		};
+
 		BoardFn.getChildren = function(id, success, fail) {
 			$http({
 				method: 'GET',
