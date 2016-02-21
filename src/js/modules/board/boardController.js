@@ -100,16 +100,6 @@
 			$('#editModal').modal('show');
 		};
 
-		$scope.saveCurrentEntity = function() {
-			$('#editModal').modal('hide');
-
-			Board.update($scope.currentEntity.id, $scope.currentEntity, function(data) {
-				console.log('Entity saved', data);
-			}, function(error) {
-				console.log('Couldn\'t save entity');
-			});
-		};
-
 		$scope.openBoard = function(id) {
 			$state.go('board', {id: id});
 		};

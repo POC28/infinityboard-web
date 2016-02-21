@@ -4,7 +4,17 @@
 		<div class="button remove-entity" ng-click="remove()"><i class="fa fa-times"></i></div>
 	</div>
 	<div class="entity-body">
-		<p ng-bind-html="entity.body"></p>
+		<div ng-repeat="content in entity.content">
+			<div ng-if="content.type == 'text'">
+				<p ng-bind="content.value"></p>
+			</div>
+			<div ng-if="content.type == 'image'" style="text-align: center;">
+				<img ng-src="{{content.value}}" style="max-width:100%; max-height:100%;"/>
+			</div>
+			<div ng-if="content.type == 'link'" style="text-align: center;">
+				<a target="_blank" href="{{content.value}}">{{content.value}}</a>
+			</div>
+		</div>
 	</div>
 	<div class="entity-title">
 		<p ng-bind="entity.title"></p>
