@@ -6,8 +6,14 @@
 		'$state', 
 		'$stateParams', 
 		'Board',
-	function($scope, $state, $stateParams, Board) {
+		'Upload',
+	function($scope, $state, $stateParams, Board, Upload) {
 		$scope.currentBoard = $stateParams.id;
+		$scope.files = [];
+
+		$scope.$watch('files', function () {
+	        $scope.upload($scope.files);
+	    });
 
 		function init() {
 			Board.find($stateParams.id, function(board) {
@@ -18,6 +24,10 @@
 			});
 		}
 		init();
+
+		$scope.upload = function(files) {
+			console.log(files);
+		};
 
 		$scope.removeEntity = function(index) {
 			Board.remove($scope.board.children[index].id, function() {

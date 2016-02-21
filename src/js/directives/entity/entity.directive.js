@@ -13,9 +13,6 @@
 			link: function(scope, elem, attrs) {
 				scope.activeMove = false;
 				scope.activeResize = false;
-				scope.doubleClick = false;
-				scope.clickTimeout = 500;
-				scope.activeClick = false;
 
 				function init() {
 					scope.updatePosition(scope.entity.pos.x, scope.entity.pos.y);
@@ -25,10 +22,6 @@
 
 				scope.remove = function() {
 					scope.$parent.removeEntity(scope.index);
-				};
-
-				scope.open = function() {
-					scope.$parent.openBoard(scope.entity.id);
 				};
 
 				scope.edit = function() {
@@ -56,29 +49,7 @@
 					elem.css('z-index', 2);
 				};
 
-				elem.on('click', function(event) {
-					if(!scope.activeClick) {
-						scope.activeClick = true;
-
-						$timeout(function() {
-							if(scope.doubleClick) {
-								scope.doubleClick = false;
-								scope.activeClick = false;
-								return false;
-							}
-
-							if(scope.activeMove) {
-								return false;
-							}
-
-							scope.activeCLick = false;
-							console.log('Edit node');
-						}, scope.clickTimeout);
-					}
-				});
-
 				elem.on('dblclick', function(event) {
-					scope.doubleClick = true;
 					scope.$parent.openBoard(scope.entity.id);
 				});
 

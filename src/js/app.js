@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('infinityBoard', ['ui.router']);
+var app = angular.module('infinityBoard', ['ui.router', 'ngFileUpload']);
 
 app.config(function($httpProvider, $stateProvider, $urlRouterProvider) {
     $httpProvider.defaults.useXDomain = true;
