@@ -13,7 +13,6 @@
 			$state.go('login');
 		}
 
-		$scope.currentBoard = $stateParams.id;
 		$scope.files = [];
 
 		$scope.$watch('files', function () {
@@ -24,6 +23,12 @@
 			Board.find($stateParams.id, function(board) {
 				console.log(board);
 				$scope.board = board;
+
+				Board.getChildren($stateParams.id, function(children) {
+					$scope.children = children;
+				}, function(error) {
+					console.log('Failed to fetch board children');
+				});
 			}, function(error) {
 				console.log('Error!');
 			});
@@ -50,7 +55,7 @@
 
 		$scope.addEntity = function() {
 			var entity = {
-				parentId: $scope.board.id,
+				parent: $scope.board.id,
 				pos: {
 					x: 100,
 					y: 100
@@ -59,17 +64,19 @@
 					width: 100,
 					height: 100
 				},
+				content: [],
 				title: 'Untitled',
 				angle: 0
 			};
 
 			Board.create(entity, function(data) {
 				entity.id = data.id;
+				$scope.children.push(data);
 
 				if($scope.board.children) {
-					$scope.board.children.push(entity);
+					$scope.board.children.push(entity.id);
 				} else {
-					$scope.board.children = [ entity ];
+					$scope.board.children = [ entity.id ];
 				}
 
 				Board.update($scope.board.id, $scope.board, function(data) {
@@ -83,7 +90,7 @@
 		};
 
 		$scope.editEntity = function(index) {
-			$scope.currentEntity = $scope.board.children[index];
+			$scope.currentEntity = $scope.children[index];
 
 			$('#editModal').modal('show');
 		};

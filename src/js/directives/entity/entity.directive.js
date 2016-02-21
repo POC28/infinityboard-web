@@ -1,7 +1,7 @@
 'use strict';
 
 (function(angular, window, undefined) {
-	angular.module('infinityBoard').directive('boardEntity', ['$timeout', function($timeout) {
+	angular.module('infinityBoard').directive('boardEntity', ['$timeout', 'Board', function($timeout, Board) {
 		return {
 			restrict: 'E',
 			replace: true,
@@ -49,6 +49,14 @@
 					elem.css('z-index', 2);
 				};
 
+				scope.updateEntity = function() {
+					Board.update(scope.entity.id, scope.entity, function(data) {
+			    		console.log('Board position/size updated!');
+			    	}, function(error) {
+			    		console.log('Failed to update board');
+			    	});
+				};
+
 				elem.on('dblclick', function(event) {
 					scope.$parent.openBoard(scope.entity.id);
 				});
@@ -91,6 +99,8 @@
 					    	scope.updatePosition(scope.entity.pos.x, scope.entity.pos.y);
 
 					    	scope.activeMove = false;
+
+					    	scope.updateEntity();
 						}
 					});
 				});
@@ -137,6 +147,8 @@
 					    	scope.updateSize(scope.entity.size.width, scope.entity.size.height);
 
 					    	scope.activeResize = false;
+
+					    	scope.updateEntity();
 						}
 					});
 				});
