@@ -1,4 +1,7 @@
 <div class="board-entity">
+	<div class="entity-title">
+		<p ng-bind="entity.title"></p>
+	</div>
 	<div class="entity-control">
 		<div class="button edit-entity" ng-click="edit()"><i class="fa fa-pencil"></i></div>
 		<div class="button remove-entity" ng-click="remove()"><i class="fa fa-times"></i></div>
@@ -15,9 +18,6 @@
 				<a target="_blank" href="{{content.value}}">{{content.value}}</a>
 			</div>
 		</div>
-	</div>
-	<div class="entity-title">
-		<p ng-bind="entity.title"></p>
 	</div>
 	<div class="resize-handle"></div>
 </div>

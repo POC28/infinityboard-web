@@ -1,6 +1,10 @@
 <div id="board" class="board" ngf-drop  ng-model="files" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
-	<div class="board-title" ng-bind="board.title"></div>
-	<board-entity ng-repeat="entity in children" data-entity="entity" data-index="$index"></board-entity>
-	<board-toolbar></board-toolbar>
-	<entity-modal entity="currentEntity"></entity-modal>
+  <div class="board-header">
+    <div class="board-title" ng-bind="board.title"></div>  
+    <board-toolbar></board-toolbar>
+  </div>
+  <div class="board-body">
+   <board-entity ng-repeat="entity in children" data-entity="entity" data-index="$index"></board-entity>
+   <entity-modal entity="currentEntity"></entity-modal>
+  </div>
 </div>
