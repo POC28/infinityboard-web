@@ -125,11 +125,11 @@
 
 				elem.on('mousedown', '.resize-handle', function(event) {
 					if(event.stopPropagation) event.stopPropagation();
-				    if(event.preventDefault) event.preventDefault();
-				    event.cancelBubble = true;
-				    event.returnValue = false;
+			    if(event.preventDefault) event.preventDefault();
+			    event.cancelBubble = true;
+			    event.returnValue = false;
 
-				    scope.activeResize = true;
+			    scope.activeResize = true;
 
 					scope.originX = event.screenX;
 					scope.originY = event.screenY;

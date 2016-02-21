@@ -105,7 +105,9 @@
 		};
 
 		$scope.goToParent = function() {
-			$state.go('board', {id: $scope.board.parent});
+			if($scope.board.parent) {
+				$state.go('board', {id: $scope.board.parent});
+			}
 		};
 	}]);
 })(angular, this);
