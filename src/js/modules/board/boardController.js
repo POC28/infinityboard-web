@@ -40,8 +40,13 @@
 		};
 
 		$scope.removeEntity = function(index) {
-			Board.remove($scope.board.children[index].id, function() {
-				$scope.board.children.splice(index, 1);
+			Board.remove($scope.children[index].id, function() {
+				for(var i in $scope.board.children) {
+					if($scope.board.children == $scope.children[index].id) {
+						$scope.board.children.splice(i, 1);
+					}
+				}
+				$scope.children.splice(index, 1);
 
 				Board.update($scope.board.id, $scope.board, function(data) {
 					console.log('Saved current board', data)
@@ -110,7 +115,7 @@
 		};
 
 		$scope.goToParent = function() {
-			$state.go('board', {id: $scope.board.parentId});
+			$state.go('board', {id: $scope.board.parent});
 		};
 	}]);
 })(angular, this);
