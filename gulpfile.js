@@ -7,7 +7,7 @@ var del = require('del');
  
 gulp.task('sass', function (done) {
 	gulp.src('./src/sass/**/*.scss')
-		.pipe(sass.sync().on('error', sass.logError))
+		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest('./www/css'), done);
 });
 

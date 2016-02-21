@@ -7,17 +7,17 @@
 		<div class="button remove-entity" ng-click="remove()"><i class="fa fa-times"></i></div>
 	</div>
 	<div class="entity-body">
-		<div ng-repeat="content in entity.content">
-			<div ng-if="content.type == 'text'">
+		<div ng-repeat="content in entity.content" class="item-list">
+			<div ng-if="content.type == 'text'" class="item-text">
 				<p ng-bind="content.value"></p>
 			</div>
-			<div ng-if="content.type == 'image'" style="text-align: center;">
+			<div ng-if="content.type == 'image'" style="text-align: center;" class="item-image">
 				<img ng-src="{{content.value}}" style="max-width:100%; max-height:100%;"/>
 			</div>
-			<div ng-if="content.type == 'link'" style="text-align: center;">
+			<div ng-if="content.type == 'link'" style="text-align: center;" class="item-link">
 				<a target="_blank" href="{{content.value}}">{{content.value}}</a>
 			</div>
 		</div>
 	</div>
-	<div class="resize-handle"></div>
+	<div class="resize-handle"><i class="fa fa-arrows-alt"></i></div>
 </div>
