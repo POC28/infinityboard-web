@@ -1,47 +1,6 @@
-<div class="board" ngf-drop  ng-model="files" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
+<div id="board" class="board" ngf-drop  ng-model="files" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">
 	<div class="board-title" ng-bind="board.title"></div>
 	<board-entity ng-repeat="entity in children" data-entity="entity" data-index="$index"></board-entity>
 	<board-toolbar></board-toolbar>
-
-	<div id="editModal" class="modal fade" tabindex="-1" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Editing Board: {{ currentEntity.title }}</h4>
-				</div>
-				<div class="modal-body">
-					<div class="radio">
-						<label for="boardType">
-							<input type="radio" name="boardType" ng-model="currentEntity.type" value="text">
-							Text
-						</label>
-					</div>
-					<div class="radio">
-						<label for="boardType">
-							<input type="radio" name="boardType" ng-model="currentEntity.type" value="image">
-							Image
-						</label>
-					</div>
-					<div class="form-group">
-						<label for="title">Title</label>
-						<input type="text" name="title" class="form-control" ng-model="currentEntity.title" placeholder="Board Title"/>
-					</div>
-					<div ng-if="currentEntity.type == 'text'">
-						<div class="form-group">
-							<label for="text">Board Text</label>
-							<textarea name="text" class="form-control" ng-model="currentEntity.content.text"></textarea>
-						</div>
-					</div>
-					<div ng-if="currentEntity.type == 'image'">
-						<img ng-src="currentEntity.content.url" />
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" ng-click="saveCurrentEntity()">Save changes</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	<entity-modal entity="currentEntity"></entity-modal>
 </div>
