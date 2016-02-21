@@ -1,81 +1,81 @@
 'use strict';
 
 (function(angular, window, undefined) {
-	angular.module('infinityBoard').directive('boardToolbar', ['BoardControlService', function(BoardControlService) {
-		return {
-			restrict: 'E',
-			replace: true,
-			templateUrl: './directives/toolbar/toolbar.template.html',
-			scope: true,
-			link: function(scope, elem, attrs) {
-				scope.activeMove = false;
+  angular.module('infinityBoard').directive('boardToolbar', ['BoardControlService', function(BoardControlService) {
+    return {
+      restrict: 'E',
+      replace: true,
+      templateUrl: './directives/toolbar/toolbar.template.html',
+      scope: true,
+      link: function(scope, elem, attrs) {
+        scope.activeMove = false;
 
-				function init() {
-					var pos = BoardControlService.getPosition();
-					scope.updatePosition(pos.x, pos.y);
-				}
+        function init() {
+          var pos = BoardControlService.getPosition();
+          scope.updatePosition(pos.x, pos.y);
+        }
 
-				scope.addEntity = function() {
-					scope.$parent.addEntity();
-				};
+        scope.addEntity = function() {
+          scope.$parent.addEntity();
+        };
 
-				scope.goBack = function() {
-					scope.$parent.goToParent();
-				};
+        scope.goBack = function() {
+          scope.$parent.goToParent();
+        };
 
-				scope.updatePosition = function(x, y) {
-					elem.css({
-						left: x,
-						top: y
-					});
-				};
+        scope.updatePosition = function(x, y) {
+          elem.css({
+            left: x,
+            top: y
+          });
+        };
 
-				elem.on('mousedown', '.toolbar-handle', function(event) {
-					scope.activeMove = true;
+        elem.on('mousedown', function(event) {
+          scope.activeMove = true;
 
-					scope.originX = event.screenX;
-					scope.originY = event.screenY;
+          scope.originX = event.screenX;
+          scope.originY = event.screenY;
 
-					var currentX = event.screenX;
-					var currentY = event.screenY;
+          var currentX = event.screenX;
+          var currentY = event.screenY;
 
-					angular.element(document).on('mousemove', function(e) {
-						if(e.stopPropagation) e.stopPropagation();
-					    if(e.preventDefault) e.preventDefault();
-					    e.cancelBubble = true;
-					    e.returnValue = false;
+          angular.element(document).on('mousemove', function(e) {
+            if(e.stopPropagation) e.stopPropagation();
+            if(e.preventDefault) e.preventDefault();
+            e.cancelBubble = true;
+            e.returnValue = false;
 
-					    if(scope.activeMove) {
-					    	currentX = e.screenX;
-					    	currentY = e.screenY;
-					    	var pos = BoardControlService.getPosition();
-					    	var posX = pos.x - (scope.originX - currentX);
-					    	var posY = pos.y - (scope.originY - currentY);
+            if(scope.activeMove) {
+              currentX = e.screenX;
+              currentY = e.screenY;
+              var pos = BoardControlService.getPosition();
+              var posX = pos.x - (scope.originX - currentX);
+              var posY = pos.y - (scope.originY - currentY);
 
-					    	scope.updatePosition(posX, posY);
-					    }
-					});
+              scope.updatePosition(posX, posY);
+            }
+          });
 
-					angular.element(document).on('mouseup', function(e) {
-						if(scope.activeMove) {
-							currentX = e.screenX;
-					    	currentY = e.screenY;
+          angular.element(document).on('mouseup', function(e) {
+            if(scope.activeMove) {
+              currentX = e.screenX;
+              currentY = e.screenY;
 
-							var pos = BoardControlService.getPosition();
-					    	var posX = pos.x - (scope.originX - currentX);
-					    	var posY = pos.y - (scope.originY - currentY);
+              var pos = BoardControlService.getPosition();
+              var posX = pos.x - (scope.originX - currentX);
+              var posY = pos.y - (scope.originY - currentY);
 
-					    	scope.updatePosition(posX, posY);
-					    	BoardControlService.setPosition(posX, posY);
+              scope.updatePosition(posX, posY);
+              BoardControlService.setPosition(posX, posY);
 
-					    	scope.activeMove = false;
-						}
-					});
-				});
+              scope.activeMove = false;
+            }
+          });
+        });
 
 
-				init();
-			}
-		};
-	}]);
+        init();
+      }
+    };
+  }]);
 })(angular, this);
