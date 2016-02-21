@@ -16,7 +16,7 @@
 					Board.update(scope.entity.id, scope.entity, function(data) {
 						console.log('Entity saved', data);
 					}, function(error) {
-						console.log('Couldn\'t save entity');
+						console.log('Couldn\'t save entity', error);
 					});
 				};
 
