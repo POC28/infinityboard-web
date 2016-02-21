@@ -31,14 +31,13 @@
 
 				scope.remove = function() {
 					if(!scope.hasMoved) {
-						scope.$parent.removeEntity(scope.index);
+						scope.$parent.removeEntity(scope.entity.id);
 					}
 				};
 
 				scope.edit = function() {
-					console.log(scope.hasMoved);
 					if(!scope.hasMoved) {
-						scope.$parent.editEntity(scope.index);
+						scope.$parent.editEntity(scope.entity.id);
 					}
 				};
 

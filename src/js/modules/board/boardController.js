@@ -39,14 +39,23 @@
 			console.log(files);
 		};
 
-		$scope.removeEntity = function(index) {
-			Board.remove($scope.children[index].id, function() {
-				for(var i in $scope.board.children) {
-					if($scope.board.children == $scope.children[index].id) {
-						$scope.board.children.splice(i, 1);
+		$scope.removeEntity = function(id) {
+			console.log('Remove board with id: ' + id);
+			
+			Board.remove(id, function() {
+				for(var index in $scope.board.children) {
+					if($scope.board.children[index] === id) {
+						$scope.board.children.splice(index, 1);
+						break;
 					}
 				}
-				$scope.children.splice(index, 1);
+				
+				for(var index in $scope.children) {
+					if($scope.children[index].id === id) {
+						$scope.children.splice(index, 1);
+						break;
+					}
+				}
 
 				Board.update($scope.board.id, $scope.board, function(data) {
 					console.log('Saved current board', data)
@@ -84,6 +93,8 @@
 					$scope.board.children = [ entity.id ];
 				}
 
+				$scope.editEntity(entity.id);
+
 				Board.update($scope.board.id, $scope.board, function(data) {
 					console.log('Saved current board', data)
 				}, function(error) {
@@ -94,9 +105,15 @@
 			});
 		};
 
-		$scope.editEntity = function(index) {
-			$scope.currentEntity = $scope.children[index];
-
+		$scope.editEntity = function(id) {
+			for(var index in $scope.children) {
+				if($scope.children[index].id === id) {
+					$scope.currentEntity = $scope.children[index];
+					break;
+				}
+			}
+			console.log("Edit entity ", $scope.currentEntity);
+			
 			$('#editModal').modal('show');
 		};
 
