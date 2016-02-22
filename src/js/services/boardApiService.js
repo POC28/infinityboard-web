@@ -60,7 +60,6 @@
 		};
 
 		BoardFn.update = function(id, board, success, fail) {
-			console.log(id);
 			$http({
 				method: 'PUT',
 				url: baseUrl + '/boards/' + id,
