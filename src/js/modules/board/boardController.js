@@ -71,12 +71,12 @@
 			var entity = {
 				parent: $scope.board.id,
 				pos: {
-					x: 100,
-					y: 100
+					x: 200,
+					y: 300
 				},
 				size: {
-					width: 100,
-					height: 100
+					width: 300,
+					height: 350
 				},
 				content: [],
 				title: 'Untitled',

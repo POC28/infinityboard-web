@@ -1,5 +1,5 @@
 //TODO: remove after presentation
 
 window.config = {
-  serverUrl: '//169.45.236.179:9292/'
+  serverUrl: '//169.45.236.179:9292'
 };
