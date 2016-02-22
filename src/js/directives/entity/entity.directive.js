@@ -31,13 +31,21 @@
 
 				scope.remove = function() {
 					if(!scope.hasMoved) {
-						scope.$parent.removeEntity(scope.entity.id);
+						if(confirm('Are you sure you want to remove this card?')) {
+							scope.$parent.removeEntity(scope.entity.id);
+						}
 					}
 				};
 
 				scope.edit = function() {
 					if(!scope.hasMoved) {
 						scope.$parent.editEntity(scope.entity.id);
+					}
+				};
+
+				scope.open = function () {
+					if(!scope.hasMoved) {
+						scope.$parent.openBoard(scope.entity.id);
 					}
 				};
 
