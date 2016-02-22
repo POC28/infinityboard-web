@@ -7,6 +7,9 @@ background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #f1f1f1 100
 background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#f1f1f1 100%);
 background: radial-gradient(ellipse at center,  #ffffff 0%,#f1f1f1 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f1f1f1',GradientType=1 );
+  .board-header {
+    z-index: 1;
+  }
 
   &-header {
     height: 60px;
