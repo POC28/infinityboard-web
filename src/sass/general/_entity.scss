@@ -1,6 +1,6 @@
 .board-entity {
 	position: absolute;
-	box-shadow: 0px 10px 15px -12px rgba(0, 0, 0, 0.33);
+	box-shadow: 0px 0px 45px -12px rgba(0, 0, 0, 0.33);
 	background-color: #fff;
 	overflow: hidden;
 
@@ -95,3 +95,8 @@
 		}
 	}
 }
+
+/*
+#editModal .delete-property {
+	color: black;
+}*/

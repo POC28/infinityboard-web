@@ -28,6 +28,10 @@
 
 					scope.entity.content.push(content);
 				};
+
+				scope.deleteProperty = function (obj) {
+					console.log(obj);
+				};
 			}
 		};
 	}]);

@@ -14,10 +14,12 @@
 					<div ng-if="content.type == 'text'">
 						<div class="form-group">
 							<label for="text">Board Text</label>
+							<div class="button delete-property pull-right" ng-click="deleteProperty(content)">X</div>
 							<textarea name="text" class="form-control" ng-model="content.value"></textarea>
 						</div>
 					</div>
 					<div ng-if="content.type == 'image'">
+						<div class="button delete-property pull-right" ng-click="deleteProperty(content)">X</div>
 						<img ng-src="{{content.value}}" />
 						<div class="form-group">
 							<label for="value">Image URL</label>
@@ -25,6 +27,7 @@
 						</div>
 					</div>
 					<div ng-if="content.type == 'link'">
+						<div class="button delete-property pull-right" ng-click="deleteProperty(content)">X</div>
 						<div class="form-group">
 							<label for="value">URL</label>
 							<input type="text" name="value" class="form-control" ng-model="content.value" placeholder="Link URL"/>
